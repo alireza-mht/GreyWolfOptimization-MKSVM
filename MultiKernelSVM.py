@@ -22,3 +22,9 @@ X, y = make_classification(n_samples=100, n_features=15, n_classes=3,
 df = pd.DataFrame(X)
 df['labels'] = pd.Series(y)
 sns.pairplot(df, hue='labels');
+
+def classify(l):
+
+
+
+    return 0;

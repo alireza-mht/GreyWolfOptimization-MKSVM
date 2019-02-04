@@ -9,6 +9,7 @@ import numpy
 import math
 
 # define the function blocks
+# define the function blocks
 def prod( it ):
     p= 1
     for n in it:
@@ -183,12 +184,15 @@ def F23(L):
       v=numpy.matrix(L-aSH[i,:])
       fit=fit-((v)*(v.T)+cSH[i])**(-1);
     o=fit.item(0);
-    return o  
+    return o
 
-def   getFunctionDetails(a):
+def F24(L):
+    a=0;
+    return a;
+def getFunctionDetails(a):
     
     # [name, lb, ub, dim]
-    param = {  0: ["F1",-2,2,26],
+    param = {  0: ["F1",-1,1,26],
                1 : ["F2",-10,10,30],
                2 : ["F3",-100,100,30],
                3 : ["F4",-100,100,30] ,

@@ -10,11 +10,11 @@ import numpy
 import math
 from solution import solution
 import time
-
+from MultiKernelSVM import classify
 
     
 
-def GWO(objf,lb,ub,dim,SearchAgents_no,Max_iter):
+def GWO(lb,ub,dim,SearchAgents_no,Max_iter):
     
     
     #Max_iter=1000
@@ -40,7 +40,7 @@ def GWO(objf,lb,ub,dim,SearchAgents_no,Max_iter):
     s=solution()
 
      # Loop counter
-    print("GWO is optimizing  \""+objf.__name__+"\"")    
+    #print("GWO is optimizing  \""+objf.__name__+"\"")
     
     timerStart=time.time() 
     s.startTime=time.strftime("%Y-%m-%d-%H-%M-%S")
@@ -52,7 +52,7 @@ def GWO(objf,lb,ub,dim,SearchAgents_no,Max_iter):
             Positions[i,:]=numpy.clip(Positions[i,:], lb, ub)
 
             # Calculate objective function for each search agent
-            fitness=objf(Positions[i,:])
+            fitness=classify(Positions[i,:])
             
             # Update Alpha, Beta, and Delta
             if fitness<Alpha_score :

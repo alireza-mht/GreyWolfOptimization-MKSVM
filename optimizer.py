@@ -6,7 +6,6 @@ Created on Tue May 17 15:50:25 2016
 """
 
 import GWO as gwo
-import benchmarks
 import csv
 import numpy
 import time

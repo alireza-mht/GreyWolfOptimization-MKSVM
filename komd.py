@@ -190,10 +190,10 @@ class KOMD(BaseEstimator, ClassifierMixin):
         values = np.unique(Y)
         Y = [1 if l == values[1] else -1 for l in Y]
         self.Y = Y
-        npos = len([1.0 for l in Y if l == 1])
-        nneg = len([1.0 for l in Y if l == -1])
-        gamma_unif = matrix([1.0 / npos if l == 1 else 1.0 / nneg for l in Y])
-        YY = matrix(np.diag(list(matrix(Y))))
+        #npos = len([1.0 for l in Y if l == 1])
+        #nneg = len([1.0 for l in Y if l == -1])
+        #gamma_unif = matrix([1.0 / npos if l == 1 else 1.0 / nneg for l in Y])
+        #YY = matrix(np.diag(list(matrix(Y))))
 
         Kf = self.__kernel_definition__()
 

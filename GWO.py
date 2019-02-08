@@ -9,7 +9,7 @@ import random
 import numpy
 from solution import solution
 import time
-from MultiKernelSVM import classify
+from MultiKernelSVM import *
 
     
 
@@ -24,13 +24,13 @@ def GWO(lb,ub,dim,SearchAgents_no,Max_iter):
     
     # initialize alpha, beta, and delta_pos
     Alpha_pos=numpy.zeros(dim)
-    Alpha_score=float("inf")
+    Alpha_score=float("-inf")
     
     Beta_pos=numpy.zeros(dim)
-    Beta_score=float("inf")
+    Beta_score=float("-inf")
     
     Delta_pos=numpy.zeros(dim)
-    Delta_score=float("inf")
+    Delta_score=float("-inf")
     
     #Initialize the positions of search agents
     Positions=numpy.random.uniform(0,1,(SearchAgents_no,dim)) *(ub-lb)+lb
@@ -43,6 +43,9 @@ def GWO(lb,ub,dim,SearchAgents_no,Max_iter):
     
     timerStart=time.time() 
     s.startTime=time.strftime("%Y-%m-%d-%H-%M-%S")
+    z = MultiKernelSVM()
+    z.preprocessing()
+
     # Main loop
     for l in range(0,Max_iter):
         for i in range(0,SearchAgents_no):
@@ -51,20 +54,20 @@ def GWO(lb,ub,dim,SearchAgents_no,Max_iter):
             Positions[i,:]=numpy.clip(Positions[i,:], lb, ub)
 
             # Calculate objective function for each search agent
-            fitness=classify(Positions[i,:])
+            fitness=z.fit(Positions[i,:])
             
             # Update Alpha, Beta, and Delta
-            if fitness<Alpha_score :
+            if fitness>Alpha_score :
                 Alpha_score=fitness; # Update alpha
                 Alpha_pos=Positions[i,:].copy()
             
             
-            if (fitness>Alpha_score and fitness<Beta_score ):
+            if (fitness<Alpha_score and fitness>Beta_score ):
                 Beta_score=fitness  # Update beta
                 Beta_pos=Positions[i,:].copy()
             
             
-            if (fitness>Alpha_score and fitness>Beta_score and fitness<Delta_score): 
+            if (fitness<Alpha_score and fitness<Beta_score and fitness>Delta_score):
                 Delta_score=fitness # Update delta
                 Delta_pos=Positions[i,:].copy()
             
@@ -119,7 +122,7 @@ def GWO(lb,ub,dim,SearchAgents_no,Max_iter):
     s.executionTime=timerEnd-timerStart
     s.convergence=Convergence_curve
     s.optimizer="GWO"
-    s.objfname=objf.__name__
+    s.objfname="s"
     
     
     

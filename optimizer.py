@@ -22,7 +22,7 @@ def selector(func_details,popSize,Iter):
 
 
 def param(a):
-    param = {0: [-1, 1, 26]}
+    param = {0: [-1, 1, 24]}
     return param.get(a,"noting")
 
 
@@ -32,8 +32,8 @@ def param(a):
 NumOfRuns=1
 
 # Select general parameters for all optimizers (population size, number of iterations)
-PopulationSize = 50
-Iterations= 500
+PopulationSize = 6
+Iterations= 9
 
 #Export results ?
 Export=True

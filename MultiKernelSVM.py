@@ -1,12 +1,21 @@
+
+"""
+Created on Tue May 17 15:50:25 2016
+
+@author: hossam
+"""
+
+
 # Import modules
-import sys
+
 import pandas as pd
 from komd import *
 from sklearn import svm
 import data_preprocessing as pre
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.metrics import accuracy_score, roc_auc_score
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+
+
 class MultiKernelSVM():
 
     def __init__(self):
@@ -15,8 +24,7 @@ class MultiKernelSVM():
         self.df = self.df.sample(20000)
         self.X = None
         self.Y = None
-       # self.Y = df['SystemStatus(SystemClass)']
-        #self.X = df.drop(['SystemStatus(SystemClass)'],axis=1)
+
 
     def preprocessing(self):
         print("start preprocessing the dataset")
@@ -28,19 +36,8 @@ class MultiKernelSVM():
         self.df.replace(cleanup_label,inplace = True)
         self.Y = self.df['SystemStatus(SystemClass)']
         self.X = self.df.drop(['SystemStatus(SystemClass)'],axis=1)
-        #.to_numpy(dtype='int32')
-        #.to_numpy()
-        #self.X = pre.rescale(self.X)
-        #self.X = pre.normalization(self.X)
-        # train/test split
-        from sklearn.model_selection import train_test_split
 
         X, Y = validation.check_X_y(self.X, self.Y, dtype=np.float64, order='C', accept_sparse='csr')
-        # ohe = OneHotEncoder(sparse=False)
-        #
-        # self.X = ohe.fit_transform(self.X)
-        # print(ohe.get_feature_names())
-        # self.Y = ohe.fit_transform()
 
 
     def fit(self , l):
@@ -53,6 +50,8 @@ def classify(X , Y , l ):
     keys = X_temp.keys()
     p = keys[0]
     i =0
+
+    #feature selection based on the GWO nummbers
     for temp in l:
         if (temp<0):
             X_temp = X_temp.drop(keys[i],axis=1)
@@ -60,16 +59,26 @@ def classify(X , Y , l ):
         i+=1
     X_temp = X_temp.to_numpy()
     Y = Y.to_numpy(dtype='int32')
+
+    #normalising data
     X_temp = pre.rescale(X_temp)
     X_temp = pre.normalization(X_temp)
-    #kernel=my_kernel(X,Y), C=0.1 , cache_size=200 , decision_function_shape='ovr'
+
+    #spliting test and train
     Xtr, Xte, Ytr, Yte = train_test_split(X_temp, Y, test_size=.5, random_state=42)
+
+    #defining the SVM classifier and the kernel method
     clf = svm.SVC(kernel=my_kernel,gamma='scale', decision_function_shape='ovo')
+
+    #defining the global variable for using in the my_kernel method
     global R
     R = Ytr
 
+    #creating the model
     clf.fit(Xtr,Ytr)
     R = Yte
+
+    #predicting the test data
     s = clf.predict(Xte)
     accuracy = accuracy_score(Yte, s)
     print(accuracy)
@@ -77,12 +86,16 @@ def classify(X , Y , l ):
 
 def my_kernel(X , K):
     global R
+
+    #Creating the BFR kernel
     bfr = KOMD()
     bfrKernel = bfr.returnKernel(X, R)
 
+    #Creating the Linear kernel
     linear = KOMD(kernel="linear")
     LinearKernel = linear.returnKernel(X, R)
 
+    #Averaging two kernel
     avaerage = 0.5 * (LinearKernel + bfrKernel)
     return avaerage
 

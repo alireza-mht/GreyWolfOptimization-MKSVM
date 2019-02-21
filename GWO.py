@@ -15,13 +15,7 @@ from MultiKernelSVM import *
 
 def GWO(lb,ub,dim,SearchAgents_no,Max_iter):
     
-    
-    #Max_iter=1000
-    #lb=-100
-    #ub=100
-    #dim=30  
-    #SearchAgents_no=5
-    
+
     # initialize alpha, beta, and delta_pos
     Alpha_pos=numpy.zeros(dim)
     Alpha_score=float("-inf")

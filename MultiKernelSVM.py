@@ -24,11 +24,11 @@ class MultiKernelSVM():
     def preprocessing(self):
          print("start preprocessing the dataset")
 
-         cleanup_label = {"SystemStatus(SystemClass)": {"DDoS_severe_normal_maxload": 0,
-                                                       "DDoS_mild_normal_maxload": 1,
-                                                       "DDoS_degrading_normal_maxload": 2,
-                                                       "normal_max_load": 3,
-                                                       "normal_average_load": 4}}
+         cleanup_label = {"SystemStatus(SystemClass)": {"zero": 0,
+                                                       "one": 1,
+                                                       "two": 2,
+                                                       "three": 3,
+                                                       "four": 4}}
          self.df.replace(cleanup_label,inplace = True)
 
          self.Y = self.df['SystemStatus(SystemClass)']

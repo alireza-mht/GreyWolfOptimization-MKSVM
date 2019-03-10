@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon May 16 00:27:50 2016
 
-@author: Hossam Faris
-"""
 
 import random
 import numpy

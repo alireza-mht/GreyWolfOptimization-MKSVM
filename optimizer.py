@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue May 17 15:50:25 2016
 
-@author: hossam
-"""
 
 import GWO as gwo
 import csv
@@ -32,8 +28,8 @@ def param(a):
 NumOfRuns=1
 
 # Select general parameters for all optimizers (population size, number of iterations)
-PopulationSize = 6
-Iterations= 3
+PopulationSize = 7
+Iterations= 7
 
 #Export results ?
 Export=True

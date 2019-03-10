@@ -1,15 +1,4 @@
-"""
-.. codeauthor:: Ivano Lauriola <ivanolauriola@gmail.com>
 
-==================
-Regularize Kernels
-==================
-
-.. currentmodule:: MKLpy.regularization
-
-This module contains function that perform a transformation over kernels and samples matrices
-
-"""
 
 import numpy as np
 

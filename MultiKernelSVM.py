@@ -1,9 +1,4 @@
 
-"""
-Created on Tue Jan 1 15:50:25 2019
-
-@author: َAlireza
-"""
 
 
 
@@ -12,7 +7,7 @@ import numpy as np
 import data_preprocessing as pre
 
 from sklearn import svm
-from sklearn.metrics import accuracy_score, recall_score
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.metrics.pairwise import rbf_kernel, polynomial_kernel, linear_kernel
 
@@ -23,7 +18,7 @@ class MultiKernelSVM():
 
         self.df = pd.read_csv('./dataset/merged_dataset_weighted.csv', delimiter=',',
                        encoding='utf-8')
-        self.df = self.df.sample(30000)
+        self.df = self.df.sample(10000)
 
 
     def preprocessing(self):
@@ -65,7 +60,7 @@ def classify(X , Y, l):
     # H = Y[:,1]
 
     #normalising data
-    X_temp = pre.rescale(X_temp)
+    X_temp = pre.rescale_01(X_temp)
     X_temp = pre.normalization(X_temp)
 
 

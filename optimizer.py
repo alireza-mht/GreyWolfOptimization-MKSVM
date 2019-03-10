@@ -22,7 +22,7 @@ def selector(func_details,popSize,Iter):
 
 
 def param(a):
-    param = {0: [-1, 1, 24]}
+    param = {0: [0, 1, 24]}
     return param.get(a,"noting")
 
 
@@ -33,7 +33,7 @@ NumOfRuns=1
 
 # Select general parameters for all optimizers (population size, number of iterations)
 PopulationSize = 6
-Iterations= 9
+Iterations= 3
 
 #Export results ?
 Export=True
@@ -41,7 +41,7 @@ Export=True
 
 #ExportToFile="YourResultsAreHere.csv"
 #Automaticly generated name by date and time
-ExportToFile="experiment"+time.strftime("%Y-%m-%d-%H-%M-%S")+".csv" 
+ExportToFile="./result/experiment"+time.strftime("%Y-%m-%d-%H-%M-%S")+".csv"
 
 # Check if it works at least once
 Flag=False

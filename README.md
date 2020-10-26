@@ -3,3 +3,9 @@ In this project, we use Grey Wolf Optimization for feature selection and multi-k
 
 # How to use?
 First, you need to change the param method and set the numbers of your features in your dataset (in optimizer.py). You can change the path of your dataset in the MultiKernelSVM.py.  In the next step, just run the optimizer file.
+
+# Refrence
+You can cite our paper as the reference:
+https://ieeexplore.ieee.org/document/9205853
+
+Note: provided code is not the final version.

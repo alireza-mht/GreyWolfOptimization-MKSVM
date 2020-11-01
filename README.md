@@ -8,4 +8,4 @@ First, you need to change the param method and set the numbers of your features 
 You can cite our paper:
 https://ieeexplore.ieee.org/document/9205853
 
-Note: provided code is not the final version.
+Note: This code is not the final version.
